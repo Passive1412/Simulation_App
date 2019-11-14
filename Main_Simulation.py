@@ -17,9 +17,13 @@ class Map:
         self.ax = self.fig.add_axes([0, 0, 1, 1], frameon = True)
         self.ax.set_xlim(0, S), self.ax.set_xticks([])
         self.ax.set_ylim(0, S), self.ax.set_yticks([])
+        print(B.balls['color'][0])
+        invert_color = 1-B.balls['color']
+        print(1-B.balls['color'][0])
         self.scat = self.ax.scatter(B.balls['position'][:,0], B.balls['position'][:,1],
-                                              s=B.balls['size']*100, lw = 0.5, edgecolors=B.balls['color'],
-                                              facecolor=B.balls['color'])
+                                      s=B.balls['size']*100, lw = 0.5, edgecolors=B.balls['color'],
+                                      facecolor=B.balls['color'])
+        self.quiv = self.ax.quiver(B.balls['position'][:,0], B.balls['position'][:,1], B.balls['velocity'][:,0],  B.balls['velocity'][:,1], color=invert_color, edgecolors="k", linewidth=0.5)
 
 
 class Balls:
