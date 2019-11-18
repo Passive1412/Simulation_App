@@ -74,25 +74,23 @@ def CheckSize(color, size):
 
 def StartInput():
     parser = argparse.ArgumentParser(description='Simulation of balls')
-    parser.add_argument('-n', '--number', type=int, default=25, help='Number of balls to simulate')
+    parser.add_argument('-n', '--number', type=int, default=5, help='Number of balls to simulate')
     parser.add_argument('-t', '--time', type=int, default=60, help='Duration of simulation in seconds')   
     parser.add_argument('-v', '--velocity', type=int, default=10, help='Max velocity') 
     parser.add_argument('-s', '--size', type=int, default=100, help='Size of box in meters') 
     return parser.parse_args()
 
 
-def update(frame_number):
-    current_index = frame_number
-    B.balls['position'][:,0]+=B.balls['velocity'][:,0]
-    B.balls['position'][:,1]+=B.balls['velocity'][:,1]    
+def update_balls(B, M):
+    print(B.balls['position'])
 
 
 def main():
     args = StartInput()
     balls = Balls(args.number, args.velocity, args.size)
     map = Map(balls, args.size)
-    #update(0)
-
+    ani = animation.FuncAnimation(map.fig, update_balls, 100)
+    #update_balls(balls, map)
     plt.show()
     
 if __name__ == "__main__":
